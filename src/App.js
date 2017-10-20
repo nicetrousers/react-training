@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Bio from './Bio.js';
 
-class App extends Component {
+export default class App extends Component {
   render() {
+    let portrait = "https://ca.slack-edge.com/T02540DGA-U0JCA4317-g0169d2f003a-72";
+    let bullets = [
+      "Works on Expectnation, the conferences app",
+      "Tries not to react too sharply"
+    ];
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Bio name="Marcel M. Cary" portrait={portrait} bullets={bullets} />
       </div>
     );
   }
 }
 
-export default App;
+// export default App;
