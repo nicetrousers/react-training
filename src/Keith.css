@@ -1,0 +1,19 @@
+.Bio {
+	display: block;
+	background-color: #ddd;
+	overflow: hidden;
+	padding: 40px;
+}
+.Keith-pic {
+	float: left;
+}
+.Keith-text {
+	float: left;
+	margin-left: 20px;
+}
+.Big-name {
+	margin-top: 0;
+}
+.App-intro-hidden {
+	visibility: hidden;
+}
