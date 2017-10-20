@@ -1,10 +1,6 @@
 import React, { Component } from 'react'; 
 
 export default class Bio extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div>
@@ -12,17 +8,19 @@ export default class Bio extends Component {
           <img src={this.props.portrait} alt={this.props.name} />
           <h1 className="App-title">{this.props.name}</h1>
         </header>
-        <p className="App-intro">
+        <div className="App-intro">
           <ul>
             {this.makeBullets()}
           </ul>
-        </p>
+        </div>
       </div>
     );
   }
 
   makeBullets() {
-    return this.props.bullets.map(bullet => <li>{bullet}</li>);
+    return this.props.bullets.map((bullet, index) => {
+      return <li key={index}>{bullet}</li>
+    });
   }
 }
 
