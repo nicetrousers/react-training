@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+# This is a stub service for handling bio JSON while we develop our
+# frontend.  It's not intended to be a production server.  It's just
+# functional enough to give a sense of how our frontend will function
+# when talking to a "real" server whose implementation is beyond the
+# scope of this training.
+
+require 'webrick'
+
+port = ARGV[0] || 8000
+if %w{-h --help}.include? port
+  abort "Usage: #$0 [port-number]"
+end
+
+server = WEBrick::HTTPServer.new :Port => port
+trap('INT') { server.shutdown }
+json = File.read "public/keith.json"
+
+server.mount_proc "/" do |req, res|
+  res.body = "GET and POST to /bios/1"
+end
+
+server.mount_proc "/bios/1" do |req, res|
+	sleep 1
+  res['Access-Control-Allow-Origin'] = '*' # Allow cross-origin requests.
+  if req.request_method == "POST"
+    json = req.body
+    res.status = 201
+  else
+    res.body = json
+  end
+end
+
+puts "Starting http://localhost:#{port}/"
+server.start

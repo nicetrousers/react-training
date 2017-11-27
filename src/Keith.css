@@ -17,3 +17,6 @@
 .App-intro-hidden {
 	visibility: hidden;
 }
+.col-medium-4 {
+	max-width: 50%;
+}
