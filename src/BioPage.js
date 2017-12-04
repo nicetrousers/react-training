@@ -23,7 +23,9 @@ export default class BioPage extends Component {
   }
 
   render() {
-    const { portrait, name, editing, loading, saving, bullets, bullets_visible } = this.state;
+    const { portrait, name, editing, loading, saving } = this.state;
+    const { bullets, bullets_visible } = this.state;
+    
     if (editing) return this.renderForm();
     if (loading) return this.renderLoading();
 
