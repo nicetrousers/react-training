@@ -1,9 +1,10 @@
 import React, { Component } from 'react'; 
-import Button from '@oreilly/shape-react-core/Button';
-import '@oreilly/shape-react-core/Button.css';
-import Input from '@oreilly/shape-react-core/Input';
-import '@oreilly/shape-react-core/Input.css';
+
+
 import BioDisplay from './BioDisplay.js';
+import BioHeading from './BioHeading.js';
+import BioBullets from './BioBullets.js';
+import BioForm from './BioForm.js';
 
 export default class BioPage extends Component {
   constructor(props) {
@@ -24,8 +25,8 @@ export default class BioPage extends Component {
     const { portrait, name, editing, loading, saving } = this.state;
     const { bullets, bullets_visible } = this.state;
     
-    if (editing) return this.renderForm();
     if (loading) return this.renderLoading();
+    if (editing) return this.renderForm();
 
     const onClick = this.handleClick.bind(this);
     const onEditClick = this.handleEditClick.bind(this);
@@ -60,30 +61,20 @@ export default class BioPage extends Component {
 
   renderForm() {
     const { name, portrait, saving } = this.state;
+    const onSubmit = this.handleSubmit.bind(this);
     return (
-      <form className="App-form" onSubmit={this.handleSubmit.bind(this)}>
-        <h1>Edit Bio</h1>
-        <Input label="Name" name="name" 
-          value={this.state.name} 
-          onChange={this.changeHandlerFor("name")} />
-        <Input label="Portrait URL" name="portrait"  
-          value={this.state.portrait} 
-          onChange={this.changeHandlerFor("portrait")} />
-        <Button type="submit" >Submit</Button>
-      </form>
+      <BioForm { ...{ name, portrait, onSubmit } } />
     );
   }
 
-  changeHandlerFor(field_name) {
-    return event => this.setState({ [field_name]: event.target.value });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    const { name, portrait, bullets } = this.state;
+  handleSubmit(formValues) {
+    const { name, portrait } = formValues;
+    const { bullets } = this.state;
     this.setState({
-      saving:true,
+      saving: true,
       editing: false, 
+      name,
+      portrait,
     }); 
     fetch('http://localhost:8000/bios/1', {
       method: 'POST',
