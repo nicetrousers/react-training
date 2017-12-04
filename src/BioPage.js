@@ -1,4 +1,7 @@
 import React, { Component } from 'react'; 
+
+
+import BioDisplay from './BioDisplay.js';
 import BioHeading from './BioHeading.js';
 import BioBullets from './BioBullets.js';
 import BioForm from './BioForm.js';
@@ -7,8 +10,7 @@ export default class BioPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bullets_visible: true,
-      editing: true, //switch back to false when done 
+      editing: false,
       loading: true,
       saving: false,
     };
@@ -31,8 +33,7 @@ export default class BioPage extends Component {
     return (
       <div>
         { saving && <div>Saving... </div>}
-        <BioHeading { ...{ portrait, name, onClick, onEditClick} } />
-        <BioBullets { ...{ bullets, bullets_visible } } />
+        <BioDisplay />
       </div>
     );
   }
