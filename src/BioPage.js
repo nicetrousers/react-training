@@ -3,14 +3,12 @@ import Button from '@oreilly/shape-react-core/Button';
 import '@oreilly/shape-react-core/Button.css';
 import Input from '@oreilly/shape-react-core/Input';
 import '@oreilly/shape-react-core/Input.css';
-import BioHeading from './BioHeading.js';
-import BioBullets from './BioBullets.js';
+import BioDisplay from './BioDisplay.js';
 
 export default class BioPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bullets_visible: true,
       editing: false,
       loading: true,
       saving: false,
@@ -34,8 +32,7 @@ export default class BioPage extends Component {
     return (
       <div>
         { saving && <div>Saving... </div>}
-        <BioHeading { ...{ portrait, name, onClick, onEditClick} }/>
-        <BioBullets { ...{ bullets, bullets_visible } }/>
+        <BioDisplay />
       </div>
     );
   }
