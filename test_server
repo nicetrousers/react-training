@@ -4,6 +4,7 @@
 # functional enough to give a sense of how our frontend will function
 # when talking to a "real" server whose implementation is beyond the
 # scope of this training.
+# type "./test_server" to start
 
 require 'webrick'
 

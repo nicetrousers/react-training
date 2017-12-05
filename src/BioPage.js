@@ -1,16 +1,11 @@
 import React, { Component } from 'react'; 
-import Button from '@oreilly/shape-react-core/Button';
-import '@oreilly/shape-react-core/Button.css';
-import Input from '@oreilly/shape-react-core/Input';
-import '@oreilly/shape-react-core/Input.css';
-import BioHeading from './BioHeading.js';
-import BioBullets from './BioBullets.js';
+import BioForm from './BioForm.js';
+import BioDisplay from './BioDisplay.js';
 
 export default class BioPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bullets_visible: true,
       editing: false,
       loading: true,
       saving: false,
@@ -24,18 +19,15 @@ export default class BioPage extends Component {
 
   render() {
     const { portrait, name, editing, loading, saving } = this.state;
-    const { bullets, bullets_visible } = this.state;
-    
+    const { bullets } = this.state;
     if (editing) return this.renderForm();
     if (loading) return this.renderLoading();
 
-    const onClick = this.handleClick.bind(this);
     const onEditClick = this.handleEditClick.bind(this);
     return (
       <div>
         { saving && <div>Saving... </div>}
-        <BioHeading { ...{ portrait, name, onClick, onEditClick} }/>
-        <BioBullets { ...{ bullets, bullets_visible } }/>
+        <BioDisplay { ...{ portrait, name, bullets, onEditClick } } />
       </div>
     );
   }
@@ -50,43 +42,28 @@ export default class BioPage extends Component {
     )
   }
 
-  handleClick() {
-    this.setState({
-      bullets_visible: !this.state.bullets_visible,
-    });
-  }
-
   handleEditClick(event) {
     event.stopPropagation();
     this.setState({ editing: true });
   }
 
   renderForm() {
-    const { name, portrait, saving } = this.state;
+    const { name, portrait } = this.state;
+    const onSubmit = this.handleSubmit.bind(this);
     return (
-      <form className="App-form" onSubmit={this.handleSubmit.bind(this)}>
-        <h1>Edit Bio</h1>
-        <Input label="Name" name="name" 
-          value={this.state.name} 
-          onChange={this.changeHandlerFor("name")} />
-        <Input label="Portrait URL" name="portrait"  
-          value={this.state.portrait} 
-          onChange={this.changeHandlerFor("portrait")} />
-        <Button type="submit" >Submit</Button>
-      </form>
+      <BioForm { ...{ name, portrait, onSubmit } } />
     );
   }
 
-  changeHandlerFor(field_name) {
-    return event => this.setState({ [field_name]: event.target.value });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    const { name, portrait, bullets } = this.state;
+  handleSubmit(formValues) {
+    const { name, portrait } = formValues;
+    const { bullets } = this.state;
     this.setState({
-      saving:true,
+      saving: true,
       editing: false, 
+      name,
+      portrait,
+      bullets,
     }); 
     fetch('http://localhost:8000/bios/1', {
       method: 'POST',
@@ -97,7 +74,6 @@ export default class BioPage extends Component {
           saving: false,
         });
       }
-    })
-
+    });
   }
 }
