@@ -1,12 +1,10 @@
 import React, { Component } from 'react'; 
-import BioForm from './BioForm.js';
-import BioDisplay from './BioDisplay.js';
+import EditableBio from './EditableBio.js';
 
 export default class BioPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editing: false,
       loading: true,
       saving: false,
     };
@@ -18,16 +16,14 @@ export default class BioPage extends Component {
   }
 
   render() {
-    const { portrait, name, editing, loading, saving } = this.state;
+    const { name, portrait, loading, saving  } = this.state;
     const { bullets } = this.state;
-    if (editing) return this.renderForm();
     if (loading) return this.renderLoading();
-
-    const onEditClick = this.handleEditClick.bind(this);
+    const onUpdate = this.handleUpdate.bind(this);
     return (
       <div>
-        { saving && <div>Saving... </div>}
-        <BioDisplay { ...{ portrait, name, bullets, onEditClick } } />
+        { saving && <div>Saving... </div> }
+        <EditableBio { ...{ name, portrait, bullets, onUpdate } } />
       </div>
     );
   }
@@ -42,25 +38,10 @@ export default class BioPage extends Component {
     )
   }
 
-  handleEditClick(event) {
-    event.stopPropagation();
-    this.setState({ editing: true });
-  }
-
-  renderForm() {
-    const { name, portrait } = this.state;
-    const onSubmit = this.handleSubmit.bind(this);
-    return (
-      <BioForm { ...{ name, portrait, onSubmit } } />
-    );
-  }
-
-  handleSubmit(formValues) {
-    const { name, portrait } = formValues;
-    const { bullets } = this.state;
+  handleUpdate(formValues) {
+    const { name, portrait, bullets } = formValues;
     this.setState({
       saving: true,
-      editing: false, 
       name,
       portrait,
       bullets,
