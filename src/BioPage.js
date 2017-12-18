@@ -1,5 +1,7 @@
 import React, { Component } from 'react'; 
-import EditableBio from './EditableBio.js';
+import EditableItem from './EditableItem.js';
+import BioForm from './BioForm.js';
+import BioDisplay from './BioDisplay.js';
 
 export default class BioPage extends Component {
   constructor(props) {
@@ -23,7 +25,11 @@ export default class BioPage extends Component {
     return (
       <div>
         { saving && <div>Saving... </div> }
-        <EditableBio { ...{ name, portrait, bullets, onUpdate } } />
+        <EditableItem item={ { name, portrait, bullets, onUpdate } } 
+          onUpdate={onUpdate}
+          itemForm={BioForm}
+          itemDisplay={BioDisplay}
+        />
       </div>
     );
   }

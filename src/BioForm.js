@@ -40,7 +40,8 @@ export default class BioForm extends Component {
 
   handleSubmit(event) {
     const { name, portrait } = this.state;
-    const formValues = { name, portrait };
+    const { bullets } = this.props;
+    const formValues = { name, portrait, bullets };
     console.log(formValues);
     event.preventDefault();
     this.props.onSubmit(formValues);

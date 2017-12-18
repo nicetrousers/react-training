@@ -1,8 +1,6 @@
 import React, { Component } from 'react'; 
-import BioForm from './BioForm.js';
-import BioDisplay from './BioDisplay.js';
 
-export default class EditableBio extends Component {
+export default class EditableItem extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -11,28 +9,29 @@ export default class EditableBio extends Component {
 	}
 
 	render() {
-    const { name, portrait, bullets } = this.props;
+    const { item } = this.props;
     const { editing } = this.state;
-
     let component;
     if (editing) {
       const onSubmit = this.handleSubmit.bind(this);
+      const ItemForm = this.props.itemForm;
       component =
-        <BioForm { ...{ name, portrait, onSubmit } } />;
+        <ItemForm { ...item } onSubmit={onSubmit} />;
     } else {
       const onEditClick = this.handleEditClick.bind(this);
+      const ItemDisplay = this.props.itemDisplay;
       component =
-        <BioDisplay { ...{ name, portrait, bullets, onEditClick } } />;
+        <ItemDisplay { ...item } onEditClick={onEditClick} />;
     }
     return component
 	}
 
-  handleSubmit(formValues) {
-  	const { onUpdate, bullets } = this.props;
+  handleSubmit(item) {
+  	const { onUpdate } = this.props;
     this.setState({
       editing: false, 
     }); 
-    onUpdate( { bullets, ...formValues } );
+    onUpdate(item);
   }
   
   handleEditClick(event) {
