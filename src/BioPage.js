@@ -25,7 +25,7 @@ export default class BioPage extends Component {
     return (
       <div>
         { saving && <div>Saving... </div> }
-        <EditableItem item={ { name, portrait, bullets, onUpdate } } 
+        <EditableItem item={ { name, portrait, bullets } } 
           onUpdate={onUpdate}
           itemForm={BioForm}
           itemDisplay={BioDisplay}

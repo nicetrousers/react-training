@@ -38,5 +38,4 @@ export default class EditableItem extends Component {
     event.stopPropagation();
     this.setState({ editing: true });
   }
-
 }
