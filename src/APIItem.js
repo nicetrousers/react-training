@@ -1,40 +1,39 @@
 import React, { Component } from 'react'; 
 import EditableItem from './EditableItem.js';
-import BioForm from './BioForm.js';
-import BioDisplay from './BioDisplay.js';
 
-export default class APIBio extends Component {
+export default class APIItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
       saving: false,
     };
-    fetch('http://localhost:8000/bios/1')
+    fetch(this.props.api_url)
       .then(response => response.json())
       .then(json => {
-        this.setState({ ...this.state, ...json, loading: false,});
+        this.setState({ ...this.state, item: json, loading: false,});
       });
   }
 
 	render() {
-    const { name, portrait, loading, saving  } = this.state;
-    const { bullets } = this.state;
+    const { item, loading, saving  } = this.state;
+    const { itemForm, itemDisplay } = this.props;
     if (loading) return this.renderLoading();
     const onUpdate = this.handleUpdate.bind(this);
 
 		return (
       <div>
         { saving && <div>Saving... </div> }
-        <EditableItem item={ { name, portrait, bullets } } 
-          onUpdate={onUpdate}
-          itemForm={BioForm}
-          itemDisplay={BioDisplay}
-        />
+        <EditableItem 
+        	item={ item } 
+          onUpdate={ onUpdate } 
+          itemForm={ itemForm }
+          itemDisplay={ itemDisplay }
+				/>
       </div>
     );
   }
-  
+
   renderLoading() {
   return (
     <div>
@@ -46,16 +45,14 @@ export default class APIBio extends Component {
   }
 
   handleUpdate(formValues) {
-    const { name, portrait, bullets } = formValues;
+    const item = formValues;
     this.setState({
       saving: true,
-      name,
-      portrait,
-      bullets,
+      item: item,
     }); 
-    fetch('http://localhost:8000/bios/1', {
+    fetch(this.props.api_url, {
       method: 'POST',
-      body: JSON.stringify({ name, portrait, bullets}),
+      body: JSON.stringify(item),
     }).then(resp => {
       if (resp.ok) {
         this.setState({ 
