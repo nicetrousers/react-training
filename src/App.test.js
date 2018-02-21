@@ -4,8 +4,22 @@ import App from './App';
 
 it('passes 3', () => {});
 
-it('renders without crashing', (done) => {
+xit('renders bio name', (done) => {
   const div = document.createElement('div');
   ReactDOM.render(<App />, div);
-  setTimeout(done, 3000);
+  setTimeout(() => {
+  	const name = "Keith Laidlaw"
+  	expect(div.outerHTML).toEqual(expect.stringContaining());
+  	done();
+  }, 3000);
+});
+
+window.fetch = () => Promise.resolve({
+	json: () => Promise.resolve(),
+});
+
+it('renders bio name with stubbed fetch', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App />, div);
+  console.log(div.outerHTML);
 });
