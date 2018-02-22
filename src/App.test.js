@@ -4,22 +4,34 @@ import App from './App';
 
 it('passes 3', () => {});
 
-xit('renders bio name', (done) => {
+/*
+it('renders bio name', (done) => {
   const div = document.createElement('div');
   ReactDOM.render(<App />, div);
   setTimeout(() => {
   	const name = "Keith Laidlaw"
-  	expect(div.outerHTML).toEqual(expect.stringContaining());
+  	expect(div.outerHTML).toEqual(expect.stringContaining(name));
   	done();
   }, 3000);
 });
+*/
 
 window.fetch = () => Promise.resolve({
-	json: () => Promise.resolve(),
+	json: () => Promise.resolve({
+		name: "The Bio Name",
+		portrait: "portrait",
+		bullets: [
+			"bullet",
+			],
+	}),
 });
 
-it('renders bio name with stubbed fetch', () => {
+it('renders bio name with stubbed fetch', (done) => {
   const div = document.createElement('div');
   ReactDOM.render(<App />, div);
-  console.log(div.outerHTML);
+  setTimeout(() => {
+		const name = "The Bio Name"
+  	expect(div.outerHTML).toEqual(expect.stringContaining(name));
+  	done();
+  }, 0);
 });
