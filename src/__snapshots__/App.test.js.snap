@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders bio snapshot 1`] = `
+<div
+  className="App"
+>
+  <div>
+    <div>
+      <header
+        className="App-header"
+        onClick={[Function]}
+      >
+        <div
+          className="App-edit"
+          onClick={[Function]}
+        >
+          <span
+            className="src-Icon-icon"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 24 24\\"><title>O&amp;apos;ReillyArtboard 20</title><path d=\\"M19.12 2.29a1 1 0 0 0-1.41 0l-2 2 4 4 2-2a1 1 0 0 0 0-1.41zM3.59 16.41A2 2 0 0 0 3 17.83V21h3.17a2 2 0 0 0 1.41-.59l10.71-10.7-4-4z\\"/></svg>",
+              }
+            }
+          />
+        </div>
+        <div
+          className="src-Avatar-wrapper src-Avatar-large"
+        >
+          <a
+            className="src-Avatar-anchor"
+            href={undefined}
+            onClick={undefined}
+            target={null}
+          >
+            <img
+              alt="avatar"
+              className="src-Avatar-avatar src-Avatar-large"
+              src="portrait"
+            />
+          </a>
+        </div>
+        <h1
+          className="App-title"
+        >
+          The Bio Name
+        </h1>
+      </header>
+      <div
+        className="App-intro"
+      >
+        <ul>
+          <li>
+            bullet
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+`;
