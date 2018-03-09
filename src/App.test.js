@@ -4,18 +4,6 @@ import App from './App';
 
 it('passes 3', () => {});
 
-/*
-it('renders bio name', (done) => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  setTimeout(() => {
-  	const name = "Keith Laidlaw"
-  	expect(div.outerHTML).toEqual(expect.stringContaining(name));
-  	done();
-  }, 3000);
-});
-*/
-
 window.fetch = () => Promise.resolve({
 	json: () => Promise.resolve({
 		name: "The Bio Name",
