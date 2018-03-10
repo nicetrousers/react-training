@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import renderer from 'react-test-renderer';
 
-it('passes 3', () => {});
+// it('passes 3', () => {});
 
 window.fetch = () => Promise.resolve({
 	json: () => Promise.resolve({
