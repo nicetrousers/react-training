@@ -20,7 +20,6 @@ it('renders saving state', (done) => {
 		itemForm={null}
 		itemDisplay={null} />
 	);
-	// wrapper.setState({ saving: true });
 	setTimeout(() => {
 		wrapper.setState({ saving: true });
 		expect(wrapper.text()).toEqual(expect.stringContaining("Saving..."));
